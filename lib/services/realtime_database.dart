@@ -68,11 +68,6 @@ class RealtimeDatabaseService {
   }
 
   Stream<String> watchPartnerMood(String partnerUid) {
-    if (partnerUid == null) {
-      return Stream.value('Error: invalid partner UID');
-    }
-
-    // Listen for changes to currentMood
     return _databaseReference
         .child('usersData').child(partnerUid).child('currentMood')
         .onValue
