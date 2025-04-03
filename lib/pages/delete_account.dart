@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DeleteAccount extends StatefulWidget{
+  const DeleteAccount({super.key});
+
   @override
   State<DeleteAccount> createState() => _DeleteAccountState();
 }
