@@ -2,6 +2,7 @@ import 'package:emotions/pages/couple.dart';
 import 'package:emotions/components/me.dart';
 import 'package:emotions/pages/moods_tab.dart';
 import 'package:emotions/pages/settings.dart';
+import 'package:emotions/services/push_notifications.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,12 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    PushNotificationsService().initNotifications();
+  }
 
   final List<Widget> _screens = [
     Center(child: Text("Shop", style: TextStyle(fontSize: 24))),
