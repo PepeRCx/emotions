@@ -16,6 +16,11 @@ final moodSyncProvider = NotifierProvider.autoDispose<MoodSyncNotifier, void>(()
   return MoodSyncNotifier();
 });
 
+final storedPartnerMood = StateProvider<String>((ref) => 'normal');
+final storedPartnerMoodProvider = NotifierProvider<StoredPartnerMoodNotifier, String>(() {
+  return StoredPartnerMoodNotifier();
+});
+
 class MoodSyncNotifier extends AutoDisposeNotifier<void> {
   @override
   void build() {
@@ -30,5 +35,17 @@ class MoodSyncNotifier extends AutoDisposeNotifier<void> {
     // Update database
     final database = ref.read(databaseServiceProvider);
     await database.updateUserMood(uid, newMood);
+  }
+}
+
+class StoredPartnerMoodNotifier extends Notifier<String> {
+  @override
+  String build() {
+    return 'normal';
+  }
+
+  void storePartnerMood(String mood) {
+    state = mood;
+    ref.read(storedPartnerMood.notifier).state = mood;
   }
 }

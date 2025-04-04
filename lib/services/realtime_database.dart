@@ -68,23 +68,16 @@ class RealtimeDatabaseService {
   }
 
   Stream<String> watchPartnerMood(String partnerUid) {
-    try {
-      return _databaseReference
-          .child('usersData').child(partnerUid).child('currentMood')
-          .onValue
-          .map((event) {
-            final mood = event.snapshot.value;
-            if (mood == null) {
-              return 'normal'; // Default value if mood is missing
-            }
-            return mood.toString();
-          })
-          .handleError((error) {
-            return 'Error: $error';
-          });
-    } catch (e) {
-      return Stream.error(e);
-    }
+    return _databaseReference
+        .child('usersData').child(partnerUid).child('currentMood')
+        .onValue
+        .map((event) {
+          final mood = event.snapshot.value;
+          return mood?.toString() ?? 'normal';
+        })
+        .handleError((error) {
+          return 'Error';
+        });
   }
 
   Future<void>linkPartner(String uid, String partnerUid) async {
