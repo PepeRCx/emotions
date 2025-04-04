@@ -5,7 +5,6 @@ import 'package:emotions/pages/partner_setup.dart';
 import 'package:emotions/pages/password_change.dart';
 import 'package:emotions/pages/signup.dart';
 import 'package:emotions/pages/username_change.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -15,19 +14,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  await messaging.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-  
-  runApp(
-    const ProviderScope(
-      child: MainApp(),
-    ),
-  );
+
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {

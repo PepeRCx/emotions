@@ -2,8 +2,9 @@ import 'package:emotions/pages/couple.dart';
 import 'package:emotions/components/me.dart';
 import 'package:emotions/pages/moods_tab.dart';
 import 'package:emotions/pages/settings.dart';
-import 'package:emotions/services/push_notifications.dart';
+import 'package:emotions/services/riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,11 +19,10 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    PushNotificationsService().initNotifications();
   }
 
   final List<Widget> _screens = [
-    Center(child: Text("Shop", style: TextStyle(fontSize: 24))),
+    ShopScreen(),
     HomeScreen(),
     InventoryScreen(),
     SettingsScreen(),
@@ -81,18 +81,23 @@ class HomePageState extends State<HomePage> {
   }
 }
 
+class ShopScreen extends ConsumerWidget {
+  const ShopScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mood = ref.watch(storedPartnerMoodProvider);
+
+    return Center(child: Stack(children: [Text(mood)]));
+  }
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-          children: [
-            CouplePage(),
-          ],
-        ),
-    );
+    return Center(child: Stack(children: [CouplePage()]));
   }
 }
 
@@ -109,10 +114,7 @@ class InventoryScreen extends StatelessWidget {
           backgroundColor: const Color(0xFFC8E2C8),
           bottom: const TabBar(
             dividerColor: Colors.transparent,
-            tabs: [
-              Tab(text: 'Me',),
-              Tab(text: 'Moods',),
-            ],
+            tabs: [Tab(text: 'Me'), Tab(text: 'Moods')],
           ),
         ),
         body: TabBarView(
@@ -123,7 +125,7 @@ class InventoryScreen extends StatelessWidget {
                   'lib/assets/backgrounds/home_bg.png',
                   fit: BoxFit.cover,
                 ),
-                MeTab() //Component
+                MeTab(), //Component
               ],
             ),
             Stack(
@@ -132,9 +134,9 @@ class InventoryScreen extends StatelessWidget {
                   'lib/assets/backgrounds/home_bg.png',
                   fit: BoxFit.cover,
                 ),
-                MoodsTab() //Component
+                MoodsTab(), //Component
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -150,15 +152,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-        children: [
-          SettingsPage(),
-        ],
-      ),
-    );
+    return Center(child: ListView(children: [SettingsPage()]));
   }
 }

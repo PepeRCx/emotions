@@ -3,6 +3,7 @@ import 'package:emotions/services/realtime_database.dart';
 import 'package:flutter/material.dart';
 import 'package:emotions/services/riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:home_widget/home_widget.dart';
 
 bool isLinked = false;
 String uid = authService.value.currentUser?.uid ?? '';
@@ -15,7 +16,6 @@ class CouplePage extends StatefulWidget {
 }
 
 class CouplePageState extends State<CouplePage> {
-
   @override
   void initState() {
     super.initState();
@@ -23,7 +23,6 @@ class CouplePageState extends State<CouplePage> {
   }
 
   void checkPartner() async {
-
     try {
       final partner = await RealtimeDatabaseService().getUserPartner(uid);
       if (partner) {
@@ -44,9 +43,8 @@ class CouplePageState extends State<CouplePage> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      child: 
-        LoadingWidget(),
-        //isLinked ? Partner() : NotPartner(),
+      child: LoadingWidget(),
+      //isLinked ? Partner() : NotPartner(),
     );
   }
 }
@@ -59,12 +57,11 @@ class NotPartner extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("You don't have a partner yet, please go to settings and link you to a partner.",
+        Text(
+          "You don't have a partner yet, please go to settings and link you to a partner.",
           textAlign: TextAlign.center,
         ),
-        Image.asset(
-          'lib/assets/single/broke.png'
-        ),
+        Image.asset('lib/assets/single/broke.png'),
       ],
     );
   }
@@ -76,7 +73,12 @@ class Partner extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final database = ref.read(databaseServiceProvider);
-    
+
+    const moodImages = {
+      'normal': 'lib/assets/skins/default/default.png',
+      'sleepy': 'lib/assets/skins/sleep/sleep.png',
+    };
+
     return FutureBuilder<String>(
       future: database.getUserPartnerUid(uid),
       builder: (context, snapshot) {
@@ -88,16 +90,14 @@ class Partner extends ConsumerWidget {
         }
 
         final partnerUid = snapshot.data!;
-        final partnerMoodStream = database.watchPartnerMood(partnerUid);
-
-        const moodImages = {
-          'normal': 'lib/assets/skins/default/default.png',
-          'sleepy': 'lib/assets/skins/sleep/sleep.png',
-        };
+        //final partnerMoodStream = database.watchPartnerMood(partnerUid);
+        print('Im here');
 
         return StreamBuilder<String>(
-          stream: partnerMoodStream,
+          stream: database.watchPartnerMood(partnerUid),
+          initialData: 'normal',
           builder: (context, snapshot) {
+            print('In stream builder, conn state: ${snapshot.connectionState}');
             if (snapshot.connectionState == ConnectionState.waiting) {
               return LoadingWidget();
             }
@@ -106,6 +106,7 @@ class Partner extends ConsumerWidget {
             }
 
             final mood = snapshot.data ?? 'loading...';
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -140,6 +141,5 @@ class LoadingWidget extends StatelessWidget {
 }
 
 Future<bool> fetchData() async {
-  await Future.delayed(Duration(seconds: 2)); // Simulate API delay
   return true;
 }
