@@ -49,13 +49,12 @@ struct SimpleEntry: TimelineEntry {
 // view that defines how our widget looks
 struct PartnerMoodWidgetEntryView : View {
     var entry: Provider.Entry
+    var defaultMood : String = "defaultMood"
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Text:")
+            Image(defaultMood)
+            Text("Mood:")
             Text(entry.text)
         }
     }
