@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.Android.AppWidgetContainer">
 
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/default_mood"
+        />
     <TextView
         android:id="@+id/text_id"
         style="@style/Widget.Android.AppWidget.InnerView"
