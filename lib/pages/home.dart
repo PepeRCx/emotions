@@ -8,6 +8,7 @@ import 'package:emotions/services/auth_service.dart';
 import 'package:emotions/services/riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:home_widget/home_widget.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -85,34 +86,28 @@ class HomePageState extends ConsumerState<HomePage> {
           _screens[_selectedIndex],
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        backgroundColor: const Color(0xFFFFEE96),
-        indicatorColor: const Color(0xFFFFE043),
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.shopping_bag_outlined),
-            selectedIcon: Icon(Icons.shopping_bag),
-            label: 'Shop',
+      bottomNavigationBar: Container(
+        color: const Color(0xFFFFEE96),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          child: GNav(
+            haptic: true,
+            gap: 8,
+            backgroundColor: const Color(0xFFFFEE96),
+            tabBackgroundColor: const Color(0xFFFFE043),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            onTabChange: (index) {
+              _onItemTapped(index);
+            },
+            tabs: [
+              GButton(icon: Icons.shopping_bag, text: 'Shop',),
+              GButton(icon: Icons.home, text: 'Home'),
+              GButton(icon: Icons.inventory, text: 'Inventory'),
+              GButton(icon: Icons.settings_outlined, text: 'Settings'),
+            ],
           ),
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.emoji_emotions_outlined),
-            selectedIcon: Icon(Icons.emoji_emotions),
-            label: 'Inventory',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-      ),
+        ),
+      )
     );
   }
 }
@@ -157,7 +152,7 @@ class InventoryScreen extends StatelessWidget {
             Stack(
               children: [
                 Image.asset(
-                  'lib/assets/backgrounds/home_bg.png',
+                  'lib/assets/backgrounds/inv_2.png',
                   fit: BoxFit.cover,
                 ),
                 MeTab(), //Component
@@ -166,7 +161,7 @@ class InventoryScreen extends StatelessWidget {
             Stack(
               children: [
                 Image.asset(
-                  'lib/assets/backgrounds/home_bg.png',
+                  'lib/assets/backgrounds/inv_1.png',
                   fit: BoxFit.cover,
                 ),
                 MoodsTab(), //Component
