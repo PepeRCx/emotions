@@ -25,7 +25,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'AmaticSC'),
+      theme: ThemeData(
+        fontFamily: 'AmaticSC',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 20),
+        )
+        ),
       home: const LoginPage(),
       routes: {
         '/signup': (context) => const SignupPage(),

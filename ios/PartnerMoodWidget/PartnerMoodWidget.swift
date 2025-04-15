@@ -50,13 +50,19 @@ struct SimpleEntry: TimelineEntry {
 struct PartnerMoodWidgetEntryView : View {
     var entry: Provider.Entry
     var defaultMood : String = "defaultMood"
-
+    var widgetBackground : String = "background"
+    
     var body: some View {
-        VStack {
+        
+        VStack{
             Image(defaultMood)
-            Text("Mood:")
             Text(entry.text)
+                .foregroundColor(.black)
         }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                Image(widgetBackground)
+            )
     }
 }
 
@@ -76,7 +82,8 @@ struct PartnerMoodWidget: Widget {
             }
         }
         .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .description("Watch partner's mood Widget")
+        .supportedFamilies([.systemSmall])
     }
 }
 
