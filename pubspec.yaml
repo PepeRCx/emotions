@@ -33,6 +33,7 @@ flutter:
     - lib/assets/single/
     - lib/assets/skins/default/
     - lib/assets/skins/sleep/
+    - lib/assets/icons/
   fonts:
     - family: 'AmaticSC'
       fonts:
