@@ -100,10 +100,50 @@ class HomePageState extends ConsumerState<HomePage> {
               _onItemTapped(index);
             },
             tabs: [
-              GButton(icon: Icons.shopping_bag, text: 'Shop',),
-              GButton(icon: Icons.home, text: 'Home'),
-              GButton(icon: Icons.inventory, text: 'Inventory'),
-              GButton(icon: Icons.settings_outlined, text: 'Settings'),
+              GButton(
+                icon: Icons.shop,
+                iconColor: Colors.transparent,
+                text: 'Shop',
+                textStyle: TextStyle(fontSize: 18),
+                leading: Image.asset(
+                  'lib/assets/icons/shop.png',
+                  width: 26,
+                  height: 26,
+                ),
+              ),
+              GButton(
+                icon: Icons.home,
+                iconColor: Colors.transparent,
+                text: 'Home',
+                textStyle: TextStyle(fontSize: 18),
+                leading: Image.asset(
+                  'lib/assets/icons/home.png',
+                  width: 26,
+                  height: 26,
+                ),
+              ),
+              GButton(
+                icon: Icons.inventory,
+                iconColor: Colors.transparent,
+                text: 'Inventory',
+                textStyle: TextStyle(fontSize: 18),
+                leading: Image.asset(
+                  'lib/assets/icons/inventory.png',
+                  width: 28,
+                  height: 28,
+                ),
+              ),
+              GButton(
+                icon: Icons.settings,
+                iconColor: Colors.transparent,
+                text: 'Settings',
+                textStyle: TextStyle(fontSize: 18),
+                leading: Image.asset(
+                  'lib/assets/icons/settings.png',
+                  width: 26,
+                  height: 26,
+                ),
+              ),
             ],
           ),
         ),
