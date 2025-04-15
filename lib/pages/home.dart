@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:emotions/models/partner_data.dart';
 import 'package:emotions/pages/couple.dart';
 import 'package:emotions/components/me.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:home_widget/home_widget.dart';
+import 'dart:io';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -88,14 +91,15 @@ class HomePageState extends ConsumerState<HomePage> {
       ),
       bottomNavigationBar: Container(
         color: const Color(0xFFFFEE96),
+        height: Platform.isAndroid ? 60 : 90,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 5 : 15, vertical: Platform.isAndroid ? 10 : 20), //5 + 10
           child: GNav(
             haptic: true,
             gap: 8,
             backgroundColor: const Color(0xFFFFEE96),
             tabBackgroundColor: const Color(0xFFFFE043),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: Platform.isAndroid ? 5 : 12), //10 + 5
             onTabChange: (index) {
               _onItemTapped(index);
             },
@@ -183,6 +187,10 @@ class InventoryScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color(0xFFC8E2C8),
           bottom: const TabBar(
+            labelStyle: TextStyle(
+              fontFamily: 'AmaticSC',
+              fontSize: 22,
+            ),
             dividerColor: Colors.transparent,
             tabs: [Tab(text: 'Me'), Tab(text: 'Moods')],
           ),
