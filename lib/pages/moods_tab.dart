@@ -18,12 +18,34 @@ class MoodsTab extends ConsumerWidget {
             children: [
               EmotionCard(
                 emotionId: 'normal',
-                text: 'Normal',
-                imagePath: 'lib/assets/skins/default/default_mood.png'),
+                text: 'Neutral',
+                imagePath: 'lib/assets/images/mood_cards/neutral.png'
+              ),
               EmotionCard(
-                emotionId: 'sleepy',
-                text: 'Sleepy', 
-                imagePath: 'lib/assets/skins/sleep/sleepy.png'),
+                emotionId: 'angry',
+                text: 'Angry', 
+                imagePath: 'lib/assets/images/mood_cards/angry.png',
+              ),
+              EmotionCard(
+                emotionId: 'happy',
+                text: 'Happy',
+                imagePath: 'lib/assets/images/mood_cards/happy.png',
+              ),
+              EmotionCard(
+                emotionId: 'hungry',
+                text: 'Hungry',
+                imagePath: 'lib/assets/images/mood_cards/hungry.png',
+              ),
+              EmotionCard(
+                emotionId: 'sad',
+                text: 'Sad',
+                imagePath: 'lib/assets/images/mood_cards/sad.png',
+              ),
+              EmotionCard(
+                emotionId: 'shy',
+                text: 'Shy',
+                imagePath: 'lib/assets/images/mood_cards/shy.png',
+              ),
             ],
           )
         ],

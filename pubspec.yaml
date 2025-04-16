@@ -32,6 +32,8 @@ flutter:
     - lib/assets/backgrounds/
     - lib/assets/single/
     - lib/assets/skins/default/
+    - lib/assets/images/mood_cards/
+    - lib/assets/images/moods/
     - lib/assets/skins/sleep/
     - lib/assets/icons/
   fonts:

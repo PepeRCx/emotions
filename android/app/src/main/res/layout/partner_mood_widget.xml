@@ -5,21 +5,23 @@
     android:theme="@style/Theme.Android.AppWidgetContainer">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/mood_image"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="2dp"
         android:src="@drawable/default_mood"
         />
     <TextView
         android:id="@+id/text_id"
-        style="@style/Widget.Android.AppWidget.InnerView"
+        style="@style/Widget.Android.AppWidget.Container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/mood_image"
         android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:layout_marginStart="2dp"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textSize="11sp"
+        android:textStyle="normal" />
 </RelativeLayout>
