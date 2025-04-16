@@ -75,7 +75,11 @@ class Partner extends ConsumerWidget {
 
     const moodImages = {
       'normal': 'lib/assets/skins/default/default.png',
-      'sleepy': 'lib/assets/skins/sleep/sleep.png',
+      'angry': 'lib/assets/images/moods/angry.png',
+      'happy': 'lib/assets/images/moods/happy.png',
+      'hungry': 'lib/assets/images/moods/hungry.png',
+      'sad': 'lib/assets/images/moods/sad.png',
+      'shy': 'lib/assets/images/moods/shy.png',
     };
 
     return FutureBuilder<String>(
