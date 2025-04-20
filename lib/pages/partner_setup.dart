@@ -57,16 +57,18 @@ class PartnerSetupPageState extends State<PartnerSetupPage> {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'lib/assets/backgrounds/home_bg.png',
-              fit: BoxFit.cover,
+      body: Center(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'lib/assets/backgrounds/home_bg.png',
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          isLoading ? LoadingWidget() : isLinked ? LinkedPartnerPage() : LinkPartnerPage(),
-        ],
+            isLoading ? LoadingWidget() : isLinked ? LinkedPartnerPage() : LinkPartnerPage(),
+          ],
+        ),
       ),
     );
   }
@@ -91,8 +93,13 @@ class LinkedPartnerPageState extends State<LinkedPartnerPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 100),
             Image.asset('lib/assets/single/heart_chicken.png'),
             Text('You are linked with someone'),
+            Spacer(),
+            MainButton(text: 'Esto no está funcionando', onPressed: () => {
+              
+            })
           ],
         ),
       )

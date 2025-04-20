@@ -23,7 +23,7 @@ class MainButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: FontWeight.w400,
           ),
         ),
