@@ -83,6 +83,52 @@ class LinkedPartnerPage extends StatefulWidget {
 }
 
 class LinkedPartnerPageState extends State<LinkedPartnerPage> {
+  String errorMessage = '';
+
+  void unlinkPartner() async {
+    try {
+      String partnerUid = await RealtimeDatabaseService().getUserPartnerUid(uid);
+      await RealtimeDatabaseService().unlinkPartner(uid, partnerUid);
+      showSuccessSnackBar();
+      if (!mounted) return;
+      Navigator.pop(context);
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Something went wrong, please try again';
+      });
+    }
+  }
+
+  Future<bool?> showConfirmDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Unlink'),
+        content: Text('This action cannot be undone, are you sure about it?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('Yes'),
+          ),
+        ],
+      )
+    );
+  }
+
+  void showSuccessSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Partner unlinked successfully', style: TextStyle(color: Colors.grey[800])),
+        duration: Duration(seconds: 3),
+        backgroundColor: const Color(0xFFFFEE96),
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -95,10 +141,18 @@ class LinkedPartnerPageState extends State<LinkedPartnerPage> {
           children: [
             SizedBox(height: 100),
             Image.asset('lib/assets/single/heart_chicken.png'),
-            Text('You are linked with someone'),
+            Text('You are linked with someone', style: TextStyle(fontSize: 18)),
             Spacer(),
-            MainButton(text: 'Esto no está funcionando', onPressed: () => {
-              
+            Text(errorMessage, style: TextStyle(
+              fontSize: 18,
+              color: Colors.red
+            ),),
+            MainButton(text: 'UNLINK', onPressed: () => {
+              showConfirmDialog(context).then((value) {
+                if (value == true) {
+                  unlinkPartner();
+                }
+              })
             })
           ],
         ),
@@ -140,7 +194,8 @@ class LinkPartnerPageState extends State<LinkPartnerPage> {
       Navigator.pop(context);
     } catch (e) {
       setState(() {
-        errorMessage = 'Something went wrong, please try again';
+        errorMessage = e.toString();
+        print(e.toString());
       });
     }
   }
@@ -177,10 +232,11 @@ class LinkPartnerPageState extends State<LinkPartnerPage> {
           MainButton(
             text: 'Connect',
             onPressed: () {
-
+              linkPartner();
             },
           ),
-          SizedBox(height: 20,),
+          SizedBox(height: 5),
+          Text(errorMessage, style: TextStyle(color: Colors.red)),
           Text("Or share this code with your partner:"),
           SizedBox(height: 5,),
           SelectableText(authService.value.currentUser?.uid ?? ''),

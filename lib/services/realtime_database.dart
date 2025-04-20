@@ -100,4 +100,18 @@ class RealtimeDatabaseService {
       throw Exception(e);
     }
   }
+
+  Future<void>unlinkPartner(String uid, String partnerUid) async {
+    try {
+      //final partnerRef = await _databaseReference.child('usersData').child(partnerUid).child('linkedPartnerId').get();
+        await _databaseReference.child('usersData').child(uid).update({
+          'linkedPartnerId': '',
+        });
+        await _databaseReference.child('usersData').child(partnerUid).update({
+          'linkedPartnerId': '',
+        });
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
