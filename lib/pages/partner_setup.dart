@@ -237,9 +237,14 @@ class LinkPartnerPageState extends State<LinkPartnerPage> {
           ),
           SizedBox(height: 5),
           Text(errorMessage, style: TextStyle(color: Colors.red)),
-          Text("Or share this code with your partner:"),
+          Text('Or share this code with your partner:'),
           SizedBox(height: 5,),
-          SelectableText(authService.value.currentUser?.uid ?? ''),
+          SelectableText(
+            authService.value.currentUser?.uid ?? '',
+            style: TextStyle(
+              fontSize: 18
+            ),
+          ),
         ],
       ),
     );

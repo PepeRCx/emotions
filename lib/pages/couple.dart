@@ -59,6 +59,9 @@ class NotPartner extends StatelessWidget {
         Text(
           "You don't have a partner yet, please go to settings and link you to a partner.",
           textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+          ),
         ),
         Image.asset('lib/assets/single/broke.png'),
       ],
