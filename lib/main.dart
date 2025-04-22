@@ -1,10 +1,10 @@
-import 'package:emotions/pages/delete_account.dart';
+import 'package:emotions/pages/auth/delete_account.dart';
 import 'package:emotions/pages/home.dart';
-import 'package:emotions/pages/login.dart';
+import 'package:emotions/pages/auth/login.dart';
 import 'package:emotions/pages/partner_setup.dart';
-import 'package:emotions/pages/password_change.dart';
-import 'package:emotions/pages/signup.dart';
-import 'package:emotions/pages/username_change.dart';
+import 'package:emotions/pages/auth/password_change.dart';
+import 'package:emotions/pages/auth/signup.dart';
+import 'package:emotions/pages/auth/username_change.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';

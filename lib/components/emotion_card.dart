@@ -23,9 +23,9 @@ class EmotionCard extends ConsumerWidget {
 
     this.selectedColor = const Color(0xFFA8D8EA),
     this.borderColor = Colors.lightBlue,
-    this.borderColorPressed = const Color(0xFF0088C6),
+    this.borderColorPressed = const Color.fromARGB(255, 0, 118, 157),
     this.backgroundColor = const Color(0xFFDCE2C8),
-    this.borderRadius = 10,
+    this.borderRadius = 20,
     this.onTap,
   });
 
@@ -52,7 +52,10 @@ class EmotionCard extends ConsumerWidget {
           height: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(color: isSelected ? borderColorPressed : borderColor, width: 2),
+            border: Border.all(
+              color: isSelected ? borderColorPressed : borderColor, 
+              width: isSelected ? 3 : 2,
+              ),
             color: backgroundColor,
           ),
           child: Column(

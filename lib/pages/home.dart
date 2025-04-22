@@ -91,9 +91,9 @@ class HomePageState extends ConsumerState<HomePage> {
       ),
       bottomNavigationBar: Container(
         color: const Color(0xFFFFEE96),
-        height: Platform.isAndroid ? 60 : 90,
+        height: Platform.isAndroid ? 65 : 90,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 5 : 15, vertical: Platform.isAndroid ? 10 : 20), //5 + 10
+          padding: EdgeInsets.symmetric(horizontal: Platform.isAndroid ? 15 : 15, vertical: Platform.isAndroid ? 10 : 20), //5 + 10
           child: GNav(
             haptic: true,
             gap: 8,

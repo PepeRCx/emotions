@@ -1,4 +1,5 @@
 import 'package:emotions/services/auth_service.dart';
+import 'package:emotions/services/realtime_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,8 @@ class DeleteAccount extends StatefulWidget{
 }
 
 class _DeleteAccountState extends State<DeleteAccount> {
+  String uid = authService.value.currentUser?.uid ?? '';
+
   bool isPasswordVisible = false;
   bool isConfirmPasswordVisible = false;
   
@@ -26,6 +29,11 @@ class _DeleteAccountState extends State<DeleteAccount> {
       return;
     }
     try {
+      String partnerUid = await RealtimeDatabaseService().getUserPartnerUid(uid);
+      bool hasPartner = await RealtimeDatabaseService().getUserPartner(uid);
+      if (hasPartner) {
+        await RealtimeDatabaseService().unlinkPartner(uid, partnerUid);
+      }
       await authService.value.deleteAccount(email: authService.value.currentUser!.email!, password: passwordController.text);
       if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
