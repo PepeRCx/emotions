@@ -84,9 +84,15 @@ class RealtimeDatabaseService {
   Future<void>linkPartner(String uid, String partnerUid) async {
     try {
       final partnerRef = await _databaseReference.child('usersData').child(partnerUid).child('linkedPartnerId').get();
+      print(partnerRef.value);
+
+      if (partnerRef.value == null) {
+        throw 'An error ocurred';
+      }
 
       if (partnerRef.exists && partnerRef.value == '') {
         final userRef = await _databaseReference.child('usersData').child(uid).child('linkedPartnerId').get();
+
         if (userRef.value == '') {
           await _databaseReference.child('usersData').child(uid).update({
             'linkedPartnerId': partnerUid,
@@ -97,7 +103,7 @@ class RealtimeDatabaseService {
         }
       }
     } catch (e) {
-      throw Exception(e);
+      throw (e.toString());
     }
   }
 

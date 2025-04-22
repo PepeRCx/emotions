@@ -183,7 +183,7 @@ class LinkPartnerPageState extends State<LinkPartnerPage> {
     }
     if (partnerUid == uid) {
       setState(() {
-        errorMessage = 'You cannot link to yourself';
+        errorMessage = 'Cannot link to yourself';
       });
       return;
     }
@@ -195,7 +195,6 @@ class LinkPartnerPageState extends State<LinkPartnerPage> {
     } catch (e) {
       setState(() {
         errorMessage = e.toString();
-        print(e.toString());
       });
     }
   }
